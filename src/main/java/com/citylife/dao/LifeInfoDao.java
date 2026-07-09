@@ -140,6 +140,21 @@ public class LifeInfoDao {
 
         return 0;
     }
+    public LifeInfo findLatestOne() {
+        String sql = "SELECT * FROM tb_info WHERE INFO_STATE = '1' ORDER BY INFO_DATE DESC, ID DESC LIMIT 1";
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+            if (rs.next()) {
+                return mapResultSet(rs);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
     private LifeInfo mapResultSet(ResultSet rs) throws SQLException {
         LifeInfo info = new LifeInfo();
