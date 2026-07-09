@@ -129,8 +129,8 @@
 <div class="header">
   <h1>都市生活信息网</h1>
   <div>
-    <a href=" ">首页</a >
-    |
+    <a href="">首页</a >
+
     <a href="${pageContext.request.contextPath}/category">分类信息</a >
     |
     <a href="${pageContext.request.contextPath}/publish">发布信息</a >
