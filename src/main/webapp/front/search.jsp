@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="com.citylife.entity.search.SearchLifeInfo" %>
+<%@ page import="com.citylife.entity.LifeInfo" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -282,17 +283,16 @@
         </div>
 
         <%
-            List<SearchLifeInfo> infoList = (List<SearchLifeInfo>) request.getAttribute("infoList");
+            List<LifeInfo> infoList = (List<LifeInfo>) request.getAttribute("infoList");
             if(infoList == null || infoList.isEmpty()){
         %>
         <div class="empty-tip">没有找到相关信息，请更换关键词重新搜索</div>
         <%
         }else{
-            for(SearchLifeInfo info : infoList){
+            for(LifeInfo info : infoList){
         %>
         <div class="info-card">
             <h3><%=info.getTitle()%></h3>
-            <p><span>分类：</span><%=info.getCategoryName()%></p>
             <p><span>联系人：</span><%=info.getLinkman()%></p>
             <p><span>联系电话：</span><%=info.getPhone()%></p>
             <p><span>邮箱：</span><%=info.getEmail()%></p>
