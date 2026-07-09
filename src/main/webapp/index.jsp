@@ -209,49 +209,40 @@
             <h2>最新信息</h2>
 
             <%
-
-                List<LifeInfo> infoList=(List<LifeInfo>)request.getAttribute("infoList");
-
-                if(infoList==null||infoList.size()==0){
-
+                List<LifeInfo> allList = (List<LifeInfo>) request.getAttribute("infoList");
+                if (allList == null || allList.isEmpty()) {
             %>
-
             <p>暂无信息</p>
-
             <%
-
-            }else{
-
-                for(LifeInfo info:infoList){
-
-            %>
-
-            <div class="info-item">
-
-                <h3>
-
-                    <a href="${pageContext.request.contextPath}/detail?id=<%=info.getId()%>">
-
-                        <%=info.getInfoTitle()%>
-
-                    </a>
-
-                </h3>
-
-                <p>联系人：<%=info.getInfoLinkman()%></p>
-
-                <p>联系电话：<%=info.getInfoPhone()%></p>
-
-                <p>发布时间：<%=info.getInfoDate()%></p>
-
-            </div>
-
-            <%
-
+            } else {
+                // 按 info_type 分组，每组取 info_date 最大的一条
+                java.util.Map<Integer, LifeInfo> latestMap = new java.util.HashMap<>();
+                for (LifeInfo info : allList) {
+                    Integer type = info.getInfoType(); // 假设实体类有 getInfoType()
+                    LifeInfo existing = latestMap.get(type);
+                    if (existing == null || info.getInfoDate().compareTo(existing.getInfoDate()) > 0) {
+                        latestMap.put(type, info);
                     }
-
                 }
-
+                // 将分组结果转为列表，并按时间降序排序（可选）
+                List<LifeInfo> infoList = new java.util.ArrayList<>(latestMap.values());
+                infoList.sort((a, b) -> b.getInfoDate().compareTo(a.getInfoDate()));
+                for (LifeInfo info : infoList) {
+            %>
+            <div class="info-item">
+                <h3>
+                    <a href="${pageContext.request.contextPath}/detail?id=<%=info.getId()%>">
+                        <%=info.getInfoTitle()%>
+                    </a>
+                </h3>
+                <!-- 如果只要求显示 INFO_TITLE，就注释掉下面三行，或者删掉 -->
+                <p>联系人：<%=info.getInfoLinkman()%></p>
+                <p>联系电话：<%=info.getInfoPhone()%></p>
+                <p>发布时间：<%=info.getInfoDate()%></p>
+            </div>
+            <%
+                    }
+                }
             %>
 
         </div>
