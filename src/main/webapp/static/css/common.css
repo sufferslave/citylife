@@ -1,0 +1,223 @@
+/* ======================================
+   common.css 全局公共样式（全站通用）
+   配色完全匹配原有style.css：
+   主色 #2f6fad | hover高亮 #ffd54f | 页面背景 #f2f4f7
+====================================== */
+/* ========== 全局基础重置 ========== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body{
+    margin:0;
+    background:#f2f4f7;
+    font-family:"Microsoft YaHei";
+    line-height: 1.6;
+}
+a {
+    text-decoration: none;
+}
+
+/* ========== 顶部导航栏（所有页面共用） ========== */
+.header{
+    background:#2f6fad;
+    color:white;
+    padding:20px 40px;
+}
+.header h1{
+    margin:0;
+    font-size: 28px;
+}
+.nav{
+    margin-top:15px;
+}
+.nav a{
+    color:white;
+    margin-right:20px;
+}
+.nav a:hover{
+    color:#ffd54f;
+}
+
+/* ========== 通用容器布局 ========== */
+.wrap {
+    width: 95%;
+    max-width: 1400px;
+    margin: 24px auto;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 20px;
+}
+.publish-container{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    width:100%;
+    padding:40px 0;
+}
+
+/* ========== 侧边栏通用卡片（首页分类侧边复用） ========== */
+.side-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+.side-card h3 {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #222222;
+}
+.side-card ul {
+    list-style: none;
+}
+.side-card li {
+    padding: 8px 4px;
+}
+.side-card li a {
+    color: #333333;
+    display: block;
+}
+.side-card li a:hover {
+    color: #2f6fad;
+    padding-left: 6px;
+    transition: 0.2s;
+}
+
+/* ========== 主内容卡片（最新信息、搜索结果、分类列表共用） ========== */
+.main-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 22px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+}
+.main-card h3 {
+    font-size: 22px;
+    margin-bottom: 18px;
+    color: #222222;
+}
+
+/* ========== 信息条目卡片 ========== */
+.info-item {
+    padding: 16px 0;
+    border-bottom: 1px solid #eee;
+}
+.info-item:last-child {
+    border-bottom: none;
+}
+.info-item h4 {
+    color: #2f6fad;
+    font-size: 17px;
+    margin-bottom: 8px;
+}
+.info-item p {
+    color: #555;
+}
+.info-item .time-tag {
+    font-size: 13px;
+    color: #999;
+    margin-top: 8px;
+}
+
+/* ========== 搜索模块通用样式 ========== */
+.search-area {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+.search-area input {
+    flex: 1;
+    height: 40px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    padding: 0 12px;
+    font-size: 15px;
+}
+.search-area button {
+    width: 80px;
+    height: 40px;
+    background:#2f6fad;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor: pointer;
+}
+.search-area button:hover {
+    background:#1f5a95;
+}
+
+/* ========== 空白无数据统一提示 ========== */
+.empty-tip {
+    text-align: center;
+    padding: 45px 0;
+    color: #888888;
+    font-size: 15px;
+}
+
+/* ========== 发布表单整套样式（沿用原有代码） ========== */
+.publish-card{
+    width:700px;
+    background:white;
+    padding:30px;
+    border-radius:10px;
+    box-shadow:0 2px 10px rgba(0,0,0,.15);
+    box-sizing:border-box;
+}
+.form-item{
+    display:flex;
+    align-items:center;
+    margin-bottom:20px;
+}
+.form-item label{
+    width:100px;
+    font-weight:bold;
+}
+.form-item input,
+.form-item select{
+    flex:1;
+    height:40px;
+    border:1px solid #ccc;
+    border-radius:5px;
+    padding:0 10px;
+}
+.form-item textarea{
+    flex:1;
+    height:180px;
+    resize:none;
+    border:1px solid #ccc;
+    border-radius:5px;
+    padding:10px;
+    box-sizing:border-box;
+}
+.button-group{
+    text-align:center;
+    margin-top:30px;
+}
+.button-group button{
+    width:120px;
+    height:42px;
+    background:#2f6fad;
+    color:white;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+.button-group button:hover{
+    background:#1f5a95;
+}
+.button-group a{
+    margin-left:20px;
+    text-decoration:none;
+    color:#2f6fad;
+}
+
+/* ========== 返回首页通用按钮 ========== */
+.back-home {
+    display: inline-block;
+    margin-top: 15px;
+    color: #2f6fad;
+}
+.back-home:hover {
+    color: #ffd54f;
+}
