@@ -19,11 +19,15 @@
     </div>
 </div>
 
-<div class="container">
-    <h2>发布生活信息</h2>
+<div class="publish-container">
 
-    <form action="${pageContext.request.contextPath}/publish" method="post">
-        <p>
+    <div class="publish-card">
+
+        <h2>发布生活信息</h2>
+
+        <form action="${pageContext.request.contextPath}/publish"
+              method="post">
+         <div class="form-item">
             <label>信息分类：</label>
             <select name="infoType" required>
                 <option value="">请选择分类</option>
@@ -39,38 +43,77 @@
                 <option value="10">出售信息</option>
                 <option value="11">寻找启示</option>
             </select>
-        </p>
+         </div>
 
-        <p>
-            <label>标题：</label>
-            <input type="text" name="infoTitle" required>
-        </p>
+            <div class="form-item">
 
-        <p>
-            <label>联系人：</label>
-            <input type="text" name="infoLinkman" required>
-        </p>
+                <label>标题</label>
 
-        <p>
-            <label>联系电话：</label>
-            <input type="text" name="infoPhone" maxlength="11" required>
-        </p>
+                <input type="text"
+                       name="infoTitle"
+                       required>
 
-        <p>
-            <label>邮箱：</label>
-            <input type="email" name="infoEmail">
-        </p>
+            </div>
 
-        <p>
-            <label>信息内容：</label>
-            <textarea name="infoContent" rows="8" cols="60" required></textarea>
-        </p>
+            <div class="form-item">
 
-        <p>
-            <button type="submit">提交发布</button>
-            <a href="${pageContext.request.contextPath}/index">返回首页</a>
-        </p>
-    </form>
+                <label>联系人</label>
+
+                <input type="text"
+                       name="infoLinkman"
+                       required>
+
+            </div>
+
+            <div class="form-item">
+
+                <label>联系电话</label>
+
+                <input type="text"
+                       name="infoPhone"
+                       maxlength="11">
+
+            </div>
+
+            <div class="form-item">
+
+                <label>邮箱</label>
+
+                <input type="email"
+                       name="infoEmail">
+
+            </div>
+
+            <div class="form-item">
+
+                <label>信息内容</label>
+
+                <textarea
+                        name="infoContent">
+
+</textarea>
+
+            </div>
+
+            <div class="button-group">
+
+                <button type="submit">
+
+                    提交发布
+
+                </button>
+
+                <a href="${pageContext.request.contextPath}/index">
+
+                    返回首页
+
+                </a>
+
+            </div>
+        </form>
+
+    </div>
+
 </div>
 
 </body>
