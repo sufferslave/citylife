@@ -94,4 +94,37 @@ public class LifeInfo {
     public void setInfoPayfor(String infoPayfor) {
         this.infoPayfor = infoPayfor;
     }
+
+    /**
+     * 下面这些方法是为了兼容 JSP 页面里的写法：
+     * info.getTitle()
+     * info.getLinkman()
+     * info.getPhone()
+     * info.getEmail()
+     * info.getContent()
+     * info.getCreateTime()
+     */
+    public String getTitle() {
+        return infoTitle;
+    }
+
+    public String getLinkman() {
+        return infoLinkman;
+    }
+
+    public String getPhone() {
+        return infoPhone;
+    }
+
+    public String getEmail() {
+        return infoEmail;
+    }
+
+    public String getContent() {
+        return infoContent;
+    }
+
+    public Date getCreateTime() {
+        return infoDate;
+    }
 }
