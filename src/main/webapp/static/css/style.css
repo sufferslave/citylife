@@ -157,3 +157,252 @@ body{
     color:#2f6fad;
 
 }
+
+/*==============================
+      后台整体布局
+===============================*/
+
+.admin-container{
+
+    width:1200px;
+
+    margin:30px auto;
+
+    display:flex;
+
+    gap:20px;
+
+}
+
+/* 左侧 */
+
+.admin-left{
+
+    width:260px;
+
+}
+
+/* 系统概览 */
+
+.admin-summary{
+
+    background:#fff;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+}
+
+.admin-summary h3{
+
+    margin-top:0;
+
+    text-align:center;
+
+}
+
+.summary-item{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    padding:12px 0;
+
+    border-bottom:1px solid #eee;
+
+}
+
+.summary-item:last-child{
+
+    border:none;
+
+}
+
+/* 菜单 */
+
+.admin-menu{
+
+    background:#fff;
+
+    border-radius:10px;
+
+    padding:20px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+}
+
+.admin-menu h3{
+
+    margin-top:0;
+
+    text-align:center;
+
+}
+
+.admin-menu a{
+
+    display:block;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    text-decoration:none;
+
+    color:#333;
+
+    border-radius:6px;
+
+}
+
+.admin-menu a:hover{
+
+    background:#2f6fad;
+
+    color:#fff;
+
+}
+
+/* 右侧 */
+
+.admin-right{
+
+    flex:1;
+
+}
+
+.admin-card{
+
+    background:#fff;
+
+    border-radius:10px;
+
+    padding:30px;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.1);
+
+}
+/*==========================
+      后台表格
+===========================*/
+
+.search-bar{
+
+    display:flex;
+
+    gap:10px;
+
+    margin:20px 0;
+
+}
+
+.search-bar input{
+
+    width:300px;
+
+    height:38px;
+
+    padding:0 10px;
+
+    border:1px solid #ccc;
+
+    border-radius:5px;
+
+}
+
+.search-bar button{
+
+    width:80px;
+
+    background:#2f6fad;
+
+    color:white;
+
+    border:none;
+
+    border-radius:5px;
+
+}
+
+.admin-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.admin-table th{
+
+    background:#2f6fad;
+
+    color:white;
+
+    padding:12px;
+
+}
+
+.admin-table td{
+
+    border:1px solid #ddd;
+
+    padding:12px;
+
+    text-align:center;
+
+}
+
+.admin-table tr:nth-child(even){
+
+    background:#f8f8f8;
+
+}
+
+.admin-table a{
+
+    text-decoration:none;
+
+    color:#2f6fad;
+
+    margin-right:10px;
+
+}
+
+.pass-btn{
+
+    background:#28a745;
+
+    color:white;
+
+    border:none;
+
+    padding:5px 12px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+}
+
+.reject-btn{
+
+    background:#dc3545;
+
+    color:white;
+
+    border:none;
+
+    padding:5px 12px;
+
+    border-radius:5px;
+
+    cursor:pointer;
+
+}

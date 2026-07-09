@@ -141,6 +141,73 @@ public class LifeInfoDao {
         return 0;
     }
 
+    public List<LifeInfo> findAuditList() {
+        List<LifeInfo> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM tb_info WHERE INFO_STATE='0' ORDER BY INFO_DATE DESC, ID DESC";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+
+            while (rs.next()) {
+                list.add(mapResultSet(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public int pass(Integer id) {
+
+        String sql = "UPDATE tb_info SET INFO_STATE='1' WHERE ID=?";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+
+        }
+
+        return 0;
+    }
+
+    public int delete(Integer id){
+
+        String sql="DELETE FROM tb_info WHERE ID=?";
+
+        try(
+                Connection conn=DBUtil.getConnection();
+                PreparedStatement ps=conn.prepareStatement(sql)
+        ){
+
+            ps.setInt(1,id);
+
+            return ps.executeUpdate();
+
+        }catch (SQLException e){
+
+            e.printStackTrace();
+
+        }
+
+        return 0;
+
+    }
+
     private LifeInfo mapResultSet(ResultSet rs) throws SQLException {
         LifeInfo info = new LifeInfo();
         info.setId(rs.getInt("ID"));
@@ -155,4 +222,6 @@ public class LifeInfoDao {
         info.setInfoPayfor(rs.getString("INFO_PAYFOR"));
         return info;
     }
+
+
 }

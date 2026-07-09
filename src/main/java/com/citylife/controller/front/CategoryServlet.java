@@ -1,5 +1,4 @@
-package com.citylife.front;
-
+package com.citylife.controller.front;
 import com.citylife.dao.LifeInfoDao;
 import com.citylife.entity.LifeInfo;
 import jakarta.servlet.ServletException;
