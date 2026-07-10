@@ -178,6 +178,46 @@ public class LifeInfoDao {
         return list;
     }
 
+    public List<LifeInfo> searchAudit(String keyword) {
+        List<LifeInfo> list = new ArrayList<>();
+
+        String sql = "SELECT *\n" +
+                "FROM tb_info\n" +
+                "WHERE INFO_STATE='0'\n" +
+                "AND (\n" +
+                "INFO_TITLE LIKE ?\n" +
+                "OR INFO_LINKMAN LIKE ?\n" +
+                "OR INFO_CONTENT LIKE ?\n" +
+                ")\n" +
+                "ORDER BY INFO_DATE DESC,ID DESC";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            String value = "%" + keyword.trim() + "%";
+
+            ps.setString(1, value);
+            ps.setString(2, value);
+            ps.setString(3, value);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    list.add(mapResultSet(rs));
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return list;
+    }
+
     public int pass(Integer id) {
 
         String sql = "UPDATE tb_info SET INFO_STATE='1' WHERE ID=?";
@@ -200,13 +240,13 @@ public class LifeInfoDao {
         return 0;
     }
 
-    public int delete(Integer id){
+    public int reject(Integer id){
 
-        String sql="DELETE FROM tb_info WHERE ID=?";
+        String sql = "UPDATE tb_info SET INFO_STATE='2' WHERE ID=?";
 
         try(
-                Connection conn=DBUtil.getConnection();
-                PreparedStatement ps=conn.prepareStatement(sql)
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
         ){
 
             ps.setInt(1,id);
@@ -238,5 +278,208 @@ public class LifeInfoDao {
         return info;
     }
 
+    public List<LifeInfo> findPassedList() {
+        List<LifeInfo> list = new ArrayList<>();
+        String sql = "SELECT * FROM tb_info WHERE INFO_STATE = '1' ORDER BY INFO_DATE DESC";
 
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+            while (rs.next()) {
+                list.add(mapResultSet(rs));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<LifeInfo> searchInfo(String keyword) {
+
+        List<LifeInfo> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM tb_info "
+                + "WHERE INFO_STATE='1' "
+                + "AND (INFO_TITLE LIKE ? "
+                + "OR INFO_LINKMAN LIKE ? "
+                + "OR INFO_CONTENT LIKE ?) "
+                + "ORDER BY INFO_DATE DESC, ID DESC";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            String value = "%" + keyword.trim() + "%";
+
+            ps.setString(1, value);
+            ps.setString(2, value);
+            ps.setString(3, value);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    list.add(mapResultSet(rs));
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<LifeInfo> searchPay(String keyword) {
+        List<LifeInfo> list = new ArrayList<>();
+        String sql = "SELECT *\n" +
+                "FROM tb_info\n" +
+                "WHERE INFO_STATE='1'\n" +
+                "AND (\n" +
+                "INFO_TITLE LIKE ?\n" +
+                "OR INFO_LINKMAN LIKE ?\n" +
+                "OR INFO_CONTENT LIKE ?\n" +
+                ")\n" +
+                "ORDER BY INFO_DATE DESC,ID DESC";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            String value = "%" + keyword.trim() + "%";
+
+            ps.setString(1, value);
+            ps.setString(2, value);
+            ps.setString(3, value);
+
+            try (ResultSet rs = ps.executeQuery()) {
+
+                while (rs.next()) {
+                    list.add(mapResultSet(rs));
+                }
+
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return list;
+    }
+
+
+
+
+    public int delete(Integer id){
+
+        String sql="DELETE\n" +
+                "FROM tb_info\n" +
+                "WHERE ID=?";
+
+        try(
+                Connection conn=DBUtil.getConnection();
+                PreparedStatement ps=conn.prepareStatement(sql)
+        ){
+
+            ps.setInt(1,id);
+
+            return ps.executeUpdate();
+
+        }catch(SQLException e){
+
+            e.printStackTrace();
+
+        }
+
+        return 0;
+
+    }
+
+    public int charge(Integer id) {
+
+        String sql = "UPDATE tb_info SET INFO_PAYFOR='1' WHERE ID=?";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int cancelCharge(Integer id) {
+
+        String sql = "UPDATE tb_info SET INFO_PAYFOR='0' WHERE ID=?";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int countPending() {
+
+        String sql = "SELECT COUNT(*) FROM tb_info WHERE INFO_STATE='0'";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int countPublished() {
+
+        String sql = "SELECT COUNT(*) FROM tb_info WHERE INFO_STATE='1'";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
 }

@@ -7,6 +7,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 用户数据访问对象
@@ -157,5 +159,172 @@ public class UserDao {
         }
 
         return user;
+    }
+
+    public List<User> findAll() {
+
+        List<User> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM tb_user where USER_TYPE=0 ORDER BY ID ";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+
+            while (rs.next()) {
+                list.add(extractUser(rs));
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public User findById(Integer id){
+
+        String sql="SELECT * FROM tb_user WHERE ID=?";
+
+        try(
+                Connection conn=DBUtil.getConnection();
+                PreparedStatement ps=conn.prepareStatement(sql)
+        ){
+
+            ps.setInt(1,id);
+
+            ResultSet rs=ps.executeQuery();
+
+            if(rs.next()){
+
+                return extractUser(rs);
+
+            }
+
+        }catch(SQLException e){
+
+            e.printStackTrace();
+
+        }
+
+        return null;
+
+    }
+
+    public int delete(Integer id){
+
+        String sql="DELETE FROM tb_user WHERE ID=?";
+
+        try(
+                Connection conn=DBUtil.getConnection();
+                PreparedStatement ps=conn.prepareStatement(sql)
+        ){
+
+            ps.setInt(1,id);
+
+            return ps.executeUpdate();
+
+        }catch(SQLException e){
+
+            e.printStackTrace();
+
+        }
+
+        return 0;
+
+    }
+
+    public int disable(Integer id) {
+
+        String sql = "UPDATE tb_user SET USER_STATE = 1 WHERE ID = ?";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public int enable(Integer id) {
+
+        String sql = "UPDATE tb_user SET USER_STATE = 0 WHERE ID = ?";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setInt(1, id);
+
+            return ps.executeUpdate();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
+    }
+
+    public List<User> search(String username) {
+
+        List<User> list = new ArrayList<>();
+
+        String sql = "SELECT * FROM tb_user "
+                + "WHERE USER_TYPE = 0 "
+                + "AND USER_NAME LIKE ? "
+                + "ORDER BY ID ";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql)
+        ) {
+
+            ps.setString(1, "%" + username + "%");
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                list.add(extractUser(rs));
+            }
+
+            rs.close();
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public int countUser() {
+
+        String sql = "SELECT COUNT(*) FROM tb_user WHERE USER_TYPE=0";
+
+        try (
+                Connection conn = DBUtil.getConnection();
+                PreparedStatement ps = conn.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()
+        ) {
+
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return 0;
     }
 }

@@ -9,7 +9,7 @@
 
     <meta charset="UTF-8">
 
-    <title>信息管理</title>
+    <title>收费设置</title>
 
     <link rel="stylesheet"
           href="${pageContext.request.contextPath}/static/css/style.css">
@@ -34,10 +34,10 @@
 
         <div class="admin-card">
 
-            <h2>信息管理</h2>
+            <h2>收费设置</h2>
 
             <form class="search-bar"
-                  action="${pageContext.request.contextPath}/admin/info-list"
+                  action="${pageContext.request.contextPath}/admin/pay"
                   method="get">
 
                 <input
@@ -123,33 +123,47 @@
 
                         </a>
 
-                        <form action="${pageContext.request.contextPath}/admin/info-list"
+                        <% if ("0".equals(info.getInfoPayfor())) { %>
 
+                        <form action="${pageContext.request.contextPath}/admin/pay"
                               method="post"
-
                               style="display:inline;"
+                              onsubmit="return confirm('确定将该信息设为收费吗？');">
 
-                              onsubmit="return confirm('确定删除该信息吗？');">
+                            <input type="hidden" name="id" value="<%=info.getId()%>">
 
-                            <input type="hidden"
+                            <input type="hidden" name="action" value="charge">
 
-                                   name="action"
+                            <button class="pass-btn">
 
-                                   value="delete">
-
-                            <input type="hidden"
-
-                                   name="id"
-
-                                   value="<%=info.getId()%>">
-
-                            <button class="reject-btn">
-
-                                删除
+                                收费
 
                             </button>
 
                         </form>
+
+                        <% } else { %>
+
+                        <form action="${pageContext.request.contextPath}/admin/pay"
+                              method="post"
+                              style="display:inline;"
+                              onsubmit="return confirm('确定取消收费吗？');">
+
+                            <input type="hidden" name="id" value="<%=info.getId()%>">
+
+                            <input type="hidden" name="action" value="cancel">
+
+                            <button class="reject-btn">
+
+                                取消
+
+                            </button>
+
+                        </form>
+
+                        <% } %>
+
+                    </td>
 
                     </td>
 

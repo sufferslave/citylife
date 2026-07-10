@@ -74,7 +74,7 @@ public class LoginController extends HttpServlet {
             // 根据角色跳转
             if (user.isAdmin()) {
                 // 管理员跳转到后台
-                response.sendRedirect(request.getContextPath() + "/admin/index.jsp");
+                response.sendRedirect(request.getContextPath() + "/admin/index");
             } else {
                 // 普通用户跳转到首页或返回页面
                 String returnUrl = request.getParameter("returnUrl");

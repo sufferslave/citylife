@@ -127,4 +127,38 @@ public class LifeInfo {
     public Date getCreateTime() {
         return infoDate;
     }
+
+    public String getTypeName() {
+
+        if (infoType == null) {
+            return "";
+        }
+
+        switch (infoType) {
+            case 1:
+                return "招聘信息";
+            case 2:
+                return "培训信息";
+            case 3:
+                return "房屋信息";
+            case 4:
+                return "求购信息";
+            case 5:
+                return "招商引资";
+            case 6:
+                return "公寓信息";
+            case 7:
+                return "求职信息";
+            case 8:
+                return "家教信息";
+            case 9:
+                return "车辆信息";
+            case 10:
+                return "出售信息";
+            case 11:
+                return "寻找启事";
+            default:
+                return "未知分类";
+        }
+    }
 }

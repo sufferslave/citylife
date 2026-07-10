@@ -36,14 +36,24 @@
 
             <h2>信息审核</h2>
 
-            <div class="search-bar">
+            <form class="search-bar"
+                  action="${pageContext.request.contextPath}/admin/audit"
+                  method="get">
 
-                <input type="text"
-                       placeholder="请输入标题关键字">
+                <input
+                        type="text"
 
-                <button>查询</button>
+                        name="keyword"
 
-            </div>
+                        placeholder="请输入标题关键字">
+
+                <button>
+
+                    搜索
+
+                </button>
+
+            </form>
 
             <table class="admin-table">
 
@@ -76,20 +86,73 @@
 
                     <td><%=info.getInfoTitle()%></td>
 
-                    <td><%=info.getInfoType()%></td>
+                    <td>
+                        <%
+                            switch(info.getInfoType()){
+                                case 1: out.print("招聘信息"); break;
+                                case 2: out.print("培训信息"); break;
+                                case 3: out.print("房屋信息"); break;
+                                case 4: out.print("求购信息"); break;
+                                case 5: out.print("招商引资"); break;
+                                case 6: out.print("公寓信息"); break;
+                                case 7: out.print("求职信息"); break;
+                                case 8: out.print("家教信息"); break;
+                                case 9: out.print("车辆信息"); break;
+                                case 10: out.print("出售信息"); break;
+                                case 11: out.print("寻物启事"); break;
+                            }
+                        %>
+                    </td>
 
                     <td><%=info.getInfoLinkman()%></td>
 
                     <td><%=info.getInfoDate()%></td>
-
+                    <td>待审核</td>
                     <td>
 
-                        <a href="#">查看</a>
+                        <a href="${pageContext.request.contextPath}/admin/info-detail?id=<%=info.getId()%>">
+                            查看
+                        </a>
 
-                        <button>通过</button>
+                        <form action="${pageContext.request.contextPath}/admin/audit"
+                              method="post"
+                              style="display:inline;">
 
-                        <button>驳回</button>
+                            <input type="hidden"
+                                   name="id"
+                                   value="<%=info.getId()%>">
 
+                            <input type="hidden"
+                                   name="action"
+                                   value="pass">
+
+                            <button class="pass-btn">
+
+                                通过
+
+                            </button>
+
+                        </form>
+
+                        <form action="${pageContext.request.contextPath}/admin/audit"
+                              method="post"
+                              style="display:inline;">
+
+                            <input type="hidden"
+                                   name="id"
+                                   value="<%=info.getId()%>">
+
+                            <input type="hidden"
+                                   name="action"
+                                   value="reject">
+
+                            <button class="reject-btn">
+
+                                驳回
+
+                            </button>
+
+                        </form>
                     </td>
 
                 </tr>

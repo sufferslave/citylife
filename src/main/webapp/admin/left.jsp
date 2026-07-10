@@ -19,17 +19,17 @@
 
     <div class="summary-item">
       <span>⏳ 待审核信息</span>
-      <strong>12</strong>
+      <p>${pendingCount}</p>
     </div>
 
     <div class="summary-item">
       <span>👥 注册用户</span>
-      <strong>58</strong>
+      <p>${userCount}</p>
     </div>
 
     <div class="summary-item">
       <span>📄 已发布信息</span>
-      <strong>236</strong>
+      <p>${publishCount}</p>
     </div>
 
   </div>
@@ -50,7 +50,7 @@
       信息管理
     </a>
 
-    <a href="${pageContext.request.contextPath}/admin/pay-setting">
+    <a href="${pageContext.request.contextPath}/admin/pay">
       收费设置
     </a>
 

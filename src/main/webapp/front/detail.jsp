@@ -262,7 +262,7 @@
         } else {
         %>
         <h2><%= info.getInfoTitle() %></h2>
-        <p><label>分类编号：</label><%= info.getInfoType() %></p>
+        <p><label>分类：</label><%= info.getTypeName() %></p>
         <p><label>联系人：</label><%= info.getInfoLinkman() %></p>
         <p><label>联系电话：</label><%= info.getInfoPhone() %></p>
         <p><label>邮箱：</label><%= info.getInfoEmail() %></p>
