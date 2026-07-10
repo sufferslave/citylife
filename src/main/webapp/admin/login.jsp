@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>用户登录</title>
+    <title>管理员登录</title>
     <style>
         * {
             box-sizing: border-box;
@@ -86,8 +86,6 @@
             margin-top: 24px;
             display: flex;
             justify-content: space-between;
-            gap: 16px;
-            flex-wrap: wrap;
             font-size: 18px;
         }
 
@@ -111,7 +109,7 @@
 
 <div class="login-page">
     <div class="login-card">
-        <h1 class="login-title">用户登录</h1>
+        <h1 class="login-title">管理员登录</h1>
 
         <%
             Object error = request.getAttribute("error");
@@ -122,23 +120,22 @@
             }
         %>
 
-        <form action="${pageContext.request.contextPath}/login" method="post">
+        <form action="${pageContext.request.contextPath}/admin/login" method="post">
             <div class="form-group">
-                <label for="username">用户名</label>
-                <input id="username" class="form-control" type="text" name="username" placeholder="请输入用户名">
+                <label for="username">管理员账号</label>
+                <input id="username" class="form-control" type="text" name="username" placeholder="请输入管理员账号">
             </div>
 
             <div class="form-group">
-                <label for="password">密码</label>
-                <input id="password" class="form-control" type="password" name="password" placeholder="请输入密码">
+                <label for="password">管理员密码</label>
+                <input id="password" class="form-control" type="password" name="password" placeholder="请输入管理员密码">
             </div>
 
-            <button class="login-btn" type="submit">登录</button>
+            <button class="login-btn" type="submit">登录后台</button>
 
             <div class="login-links">
-                <a href="${pageContext.request.contextPath}/register.jsp">注册账号</a>
-                <a href="${pageContext.request.contextPath}/admin/login">后台管理</a>
-                <a href="${pageContext.request.contextPath}/index.jsp">返回首页</a>
+                <a href="${pageContext.request.contextPath}/index">返回首页</a>
+                <a href="${pageContext.request.contextPath}/login.jsp">普通用户登录</a>
             </div>
         </form>
     </div>

@@ -135,7 +135,7 @@
         |
         <a href="${pageContext.request.contextPath}/publish">发布信息</a>
         |
-        <a href="${pageContext.request.contextPath}/admin/index">后台管理</a>
+        <a href="${pageContext.request.contextPath}/admin/login">后台管理</a>
     </div>
     <hr>
 </div>
