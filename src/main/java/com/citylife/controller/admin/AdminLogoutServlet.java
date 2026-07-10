@@ -8,21 +8,14 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet("/admin/index")
-public class AdminIndexServlet extends HttpServlet {
+@WebServlet("/admin/logout")
+public class AdminLogoutServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Object admin = request.getSession().getAttribute("admin");
-
-        if (admin == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
-            return;
-        }
-
-        // 登录成功后进入小组成员写好的后台首页
-        request.getRequestDispatcher("/admin/index.jsp").forward(request, response);
+        request.getSession().removeAttribute("admin");
+        response.sendRedirect(request.getContextPath() + "/admin/login");
     }
 }

@@ -21,10 +21,14 @@ public class DBUtil {
     // 静态代码块，加载数据库配置
     static {
         try {
-            // 加载配置文件
             Properties props = new Properties();
             InputStream in = DBUtil.class.getClassLoader()
                     .getResourceAsStream("jdbc.properties");
+
+            if (in == null) {
+                throw new RuntimeException("未找到 jdbc.properties，请确认文件在 src/main/resources 目录下");
+            }
+
             props.load(in);
 
             driver = props.getProperty("jdbc.driver");
@@ -32,10 +36,11 @@ public class DBUtil {
             username = props.getProperty("jdbc.username");
             password = props.getProperty("jdbc.password");
 
-            // 加载驱动
             Class.forName(driver);
 
             System.out.println("数据库驱动加载成功：" + driver);
+            System.out.println("数据库连接地址：" + url);
+            System.out.println("数据库用户名：" + username);
         } catch (Exception e) {
             System.err.println("数据库配置加载失败：" + e.getMessage());
             e.printStackTrace();
